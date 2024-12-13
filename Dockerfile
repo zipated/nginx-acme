@@ -4,7 +4,7 @@ FROM nginx:1.27.0-alpine
 WORKDIR /root
 
 # install req
-RUN apk update && apk add curl openssl socat
+RUN apk update && apk add bash curl openssl socat
 
 # install acme.sh
 RUN curl https://get.acme.sh | sh
@@ -22,4 +22,4 @@ RUN chmod +x /root/entrypoint.sh
 
 # expose
 VOLUME ["/cert", "/etc/nginx/conf.d", "/etc/nginx/nginx.conf"]
-CMD ["/root/entrypoint.sh"]
+CMD ["/bin/bash", "/root/entrypoint.sh"]
