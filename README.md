@@ -1,4 +1,4 @@
-# Nginx and Acme.sh
+# Nginx and Acme.sh（仅支持Cloudflare）
 
 - 基于 [nginxinc/docker-nginx](https://github.com/nginxinc/docker-nginx) 官方docker
   修改的，集成  [acmesh-official/acme.sh](https://github.com/acmesh-official/acme.sh),
@@ -7,7 +7,15 @@
 
 > 注意：由于申请的是泛域名证书，因此你必须为域名拥有者
 >
->   注意：**重新创建容器**会重新申请所有泛域名证书
+> 注意：**重新创建容器**会重新申请所有泛域名证书
+>
+> ==证书持久化==：在正确创建容器后，将该容器重新导出为镜像
+>
+> ```
+> docker commit nginx yilee01/nginx-acme:loc
+> ```
+
+
 
 ### 构建镜像
 
@@ -29,9 +37,9 @@ docker pull yilee01/nginx-acme
 
 > 注意：使用需要传递下述命令中的环境变量给docker，供acme.sh使用
 >
-> 注意：默认使用 dns_cf（Cloudflare），其他域名参考[DNS  API](https://github.com/acmesh-official/acme.sh/wiki/dnsapi)
+> ==**注意**==：多域名仅支持 dns_cf（Cloudflare）
 >
-> 参数解释：
+> dns_cf参数解释：
 >   - `CF_Token_List`：Cloudflare API Token，多个以英文逗号分割，第一个必须，后续可选
 >   - `CF_Account_ID_List`：Cloudflare API Account ID，多个以英文逗号分割，，第一个必须，后续可选
 >   - `DNS_List`：DNS API，多个以英文逗号分割，第一个必须，后续可选
