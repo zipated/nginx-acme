@@ -17,7 +17,7 @@ RUN mkdir -p /etc/nginx/logs
 RUN touch /etc/nginx/logs/access.log
 
 # add entrypoint.sh
-ADD ./docker/entrypoint.sh .
+ADD ./docker/* .
 RUN chmod +x /root/entrypoint.sh
 RUN chmod +x /root/auto_renew.sh
 
