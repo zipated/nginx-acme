@@ -19,6 +19,7 @@ RUN touch /etc/nginx/logs/access.log
 # add entrypoint.sh
 ADD ./docker/entrypoint.sh .
 RUN chmod +x /root/entrypoint.sh
+RUN chmod +x /root/auto_renew.sh
 
 # expose
 VOLUME ["/cert", "/etc/nginx/conf.d", "/etc/nginx/nginx.conf"]

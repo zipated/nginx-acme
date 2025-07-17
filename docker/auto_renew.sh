@@ -68,7 +68,5 @@ done
 # Execute
 "/root/.acme.sh/acme.sh" --cron --home "/root/.acme.sh"
 
-# Add crontab
-echo -e "13 2 * * * /root/auto_renew.sh" | crontab -
-
-nginx -g 'daemon off;'
+# Nginx reload
+nginx -s reload

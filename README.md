@@ -39,10 +39,9 @@ docker pull yilee01/nginx-acme
 >
 > ==**注意**==：多域名仅支持 dns_cf（Cloudflare）
 >
-> dns_cf参数解释：
+> 参数解释(仅支持 dns_cf)：
 >   - `CF_Token_List`：Cloudflare API Token，多个以英文逗号分割，第一个必须，后续可选
 >   - `CF_Account_ID_List`：Cloudflare API Account ID，多个以英文逗号分割，，第一个必须，后续可选
->   - `DNS_List`：DNS API，多个以英文逗号分割，第一个必须，后续可选
 >   - `DOMAIN_List`：要申请的域名，多个以英文逗号分割，每一个都必须
 >   - `EMAIL`：邮箱，必须
 
@@ -56,7 +55,6 @@ docker run -d \
   -v ./nginx.conf:/etc/nginx/nginx.conf \
   -e CF_Token_List=token1,token2 \
   -e CF_Account_ID_List=账号1,账号2 \
-  -e DNS_List=dns_cf,dns_dp \
   -e DOMAIN_List=域名1,域名2 \
   -e EMAIL=[邮箱] \
   yilee01/nginx-acme:latest
@@ -79,7 +77,6 @@ services:
     environment:
       - CF_Token_List=token1,token2
       - CF_Account_ID_List=账号1,账号2
-      - DNS_List=dns_cf,dns_dp
       - DOMAIN_List=域名1,域名2
       - EMAIL=[邮箱]
 ```
