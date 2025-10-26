@@ -1,3 +1,5 @@
+# **!!!** 已废弃，转而使用 https://github.com/0xJacky/nginx-ui⁠
+
 # Nginx and Acme.sh（仅支持Cloudflare）
 
 - 基于 [nginxinc/docker-nginx](https://github.com/nginxinc/docker-nginx) 官方docker
