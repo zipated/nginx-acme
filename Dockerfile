@@ -1,5 +1,6 @@
 # Builder
-FROM nginx:1.29.0-alpine
+ARG VERSION=1.29.0
+FROM nginx:${VERSION}-alpine
 
 WORKDIR /root
 
