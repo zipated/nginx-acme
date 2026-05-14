@@ -1,4 +1,4 @@
-# **!!!** 已废弃，转而使用 https://github.com/0xJacky/nginx-ui⁠
+# 原项目 [liheji/nginx-acme](https://github.com/liheji/nginx-acme)
 
 # Nginx and Acme.sh（仅支持Cloudflare）
 
@@ -14,7 +14,7 @@
 > ==证书持久化==：在正确创建容器后，将该容器重新导出为镜像
 >
 > ```
-> docker commit nginx yilee01/nginx-acme:loc
+> docker commit nginx zipated/nginx-acme:loc
 > ```
 
 
@@ -28,7 +28,7 @@ docker build -t nginx-acme .
 ### 拉取镜像
 
 ```sh
-docker pull yilee01/nginx-acme
+docker pull zipated/nginx-acme
 ```
 
 # 运行程序
@@ -59,7 +59,7 @@ docker run -d \
   -e CF_Account_ID_List=账号1,账号2 \
   -e DOMAIN_List=域名1,域名2 \
   -e EMAIL=[邮箱] \
-  yilee01/nginx-acme:latest
+  zipated/nginx-acme:latest
 ```
 
 ### docker-compose
@@ -69,7 +69,7 @@ version: '3.3'
 services:
   nginx:
     container_name: nginx
-    image: yilee01/nginx-acme:latest
+    image: zipated/nginx-acme:latest
     restart: always
     network_mode: "host"
     volumes:
