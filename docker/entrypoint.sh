@@ -23,7 +23,7 @@ done
 if [ "$any_found" = false ]; then
        echo "Register account and set default CA."
       "/root/.acme.sh/acme.sh" --register-account -m "$EMAIL"
-      "/root/.acme.sh/acme.sh" --set-default-ca --server zerossl
+      "/root/.acme.sh/acme.sh" --set-default-ca --server letsencrypt
 fi
 
 # Helper function
