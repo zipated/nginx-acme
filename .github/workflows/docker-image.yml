@@ -9,6 +9,11 @@ on:
         description: 'Version (x.x.x)'
         required: false
         default: ''
+      push_latest:
+        description: 'Also tag the image as latest'
+        type: boolean
+        required: false
+        default: true
 
 jobs:
   docker:
@@ -46,15 +51,27 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "Using version: $VERSION"
 
+      - name: Compute image tags
+        id: tags
+        run: |
+          IMAGE="${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}"
+          TAGS="${IMAGE}:${{ env.version }}"
+          if [[ "${{ github.event_name }}" == "release" || "${{ inputs.push_latest }}" == "true" ]]; then
+            TAGS="${TAGS}"$'\n'"${IMAGE}:latest"
+          fi
+          {
+            echo "tags<<EOF"
+            echo "$TAGS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64
           push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:${{ env.version }}
-            ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+          tags: ${{ steps.tags.outputs.tags }}
           build-args: |
             VERSION=${{ env.version }}
 
